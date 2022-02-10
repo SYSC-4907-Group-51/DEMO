@@ -8,19 +8,22 @@ import Header from './Header';
 
 export default function AddTracker() {
   const [error, setError] = useState("")
-  const { currentUser, logout } = useAuth()
-  const navigate = useNavigate();
+  const { authorization } = useAuth()
 
-
-  async function handleLogout() {
-    setError("")
+  async function handleAuthorization(e) {
+    e.preventDefault()
 
     try {
-      navigate("/")
+    setError("")
+    const response = await authorization()
+    console.log(response)
     } catch {
-      setError("Failed to log out")
+    setError("Failed to authorize")
     }
-  }
+}
+
+
+
 
   return (
     <>
@@ -32,9 +35,9 @@ export default function AddTracker() {
         <Card.Body>
           <h2 className="text-center mb-4">Profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}
-          <Link to="/login" className="btn btn-primary w-100 mt-3">
-            Add Tracker
-          </Link>
+          <Button onClick={handleAuthorization} className="w-100" type="submit">
+              Add Tracker
+          </Button>
         </Card.Body>
       </Card>
       

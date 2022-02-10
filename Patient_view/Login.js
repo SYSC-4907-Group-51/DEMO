@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "./AuthContext"
 import { Link, useNavigate } from "react-router-dom"
+import store from "../store"
 
 const Login = (props) => {
     const emailRef = useRef()
@@ -20,9 +21,18 @@ const Login = (props) => {
         const response = await login(emailRef.current.value, passwordRef.current.value)
         console.log(response)
         if(response.details == "Invalid username/password"){
+        //  if(response.status !== 200){
             setError("Invalid username/password")
         } else {
-            navigate("/addTracker")
+            
+            store.dispatch({
+                type: "storeAccess",
+                payload: {
+                    access: response.access
+                }
+            });
+            console.log(store.getState());
+            navigate("/share")
         }
         } catch {
         setError("Failed to log in")
@@ -35,7 +45,9 @@ const Login = (props) => {
         <Card> 
             <Card.Body>
                 <h2 className = 'text-center mb-4'>Log in</h2>
+
                 {error && <Alert variant="danger">{error}</Alert>}
+                
                 <Form onSubmit={handleSubmit}>
                     <Form.Group id ="username">
                         <Form.Label>Username</Form.Label>
