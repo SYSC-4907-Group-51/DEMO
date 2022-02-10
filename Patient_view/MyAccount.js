@@ -1,76 +1,26 @@
 // src/Login.js 
-import React, { useRef, useState } from "react"
-import { Form, Button, Card, Navbar, Alert } from 'react-bootstrap'
+import React, { useState } from "react";
+import { Form, Button, Card, Navbar } from 'react-bootstrap'
 import Header from './Header';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
-import store from "../store"
-
 
 const MyAccount = (props) => {
-    // const emailRef = useRef()
-    // const passwordRef = useRef()
     const [error, setError] = useState("")
-    const { authorization } = useAuth()
-    const { currentUser, logout, deleteAccount } = useAuth()
-    const passwordRef = useRef()
+    const { currentUser, logout } = useAuth()
     const navigate = useNavigate();
+    
 
 
     async function handleLogout() {
         setError("")
-        console.log()
+    
         try {
-            navigate("/")
+          navigate("/")
         } catch {
-            setError("Failed to log out")
+          setError("Failed to log out")
         }
-    }
-
-
-
-    async function handleSubmit() {
-        //  e.preventDeafult()
-        // try {
-
-        try{
-        setError("")
-        const response = await deleteAccount(passwordRef.current.value)
-        console.log(response)
-
-        // if(response.details == "Invalid password"){
-        //     setError("Invalid password")
-        // } else {
-            store.dispatch({
-                type: "storeAccess",
-                payload: {
-                    access: response.access
-                }
-            });
-            console.log(store.getState());
-            // navigate("/")
-        //}
-        }catch{
-            setError("Failed to delete account")
-        }
-
-        //console.log(response)
-        // if(response.details == "Invalid password"){
-        //     setError("Invalid password")
-        // } else {
-        //     store.dispatch({
-        //         type: "storeAccess",
-        //         payload: {
-        //             access: response.access
-        //         }
-        //     });
-        //     console.log(store.getState());
-        //     navigate("/")
-        // }
-        // } catch {
-        // setError("Failed to log in")
-        // }
-    }
+      }
 
     return (
         <>
@@ -106,34 +56,15 @@ const MyAccount = (props) => {
                         <Form.Control type="password" required />
                     </Form.Group>
                     <Button className="w-100 text">Update Changes </Button>
-                </Form>
 
+                    
+                </Form>
                 <div className="w-100 text-center mt-2">
-                    <Button onClick={handleLogout}>
+                    <Button variant="link" onClick={handleLogout}>
                         Log Out
                     </Button>
-
-
-
-
                 </div>
-                <Card>
-                    <Card.Body>
-
-                        < Form  onSubmit={handleSubmit} style={{ margin: 20 }} >
-                            {error && <Alert variant="danger">{error}</Alert>}
-
-                            <Form.Group id="password">
-                                <Form.Label> Confirm Password 2 delete</Form.Label>
-                                <Form.Control type="password" ref={passwordRef} required />
-                            </Form.Group>
-
-                            <Button type = "submit"  className="w-100 text">Delete Account </Button>
-                        </Form>
-                    </Card.Body>
-                </Card>
-
-
+                <Button style={{ margin: 20 }} className="w-100 text">Delete Account </Button>
 
             </div>
 
