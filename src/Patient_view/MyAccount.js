@@ -24,20 +24,20 @@ const MyAccount = (props) => {
             setError("")
             const response = await logout();
             console.log(response)
-            if(response.details == "Successfully Logged out" ){ // checks what type of response
-            // if(response.status_code === 200 ){
+            // if(response.details == "Successfully Logged out" ){ // checks what type of response
+            if(response.status_code === 200 ){
                 navigate("/");
                 console.log(store.getState());
                 
             }
-            else{
-                // if is not necessary but makes more explict 
-                if(response.status === 401 || response.status === 400 ){
-                //if(response.status_code === 401 || response.status_code === 400 ){
-                    console.log(response.detail);
-                    setError(response.detail);
-                }
-            }
+            // else{
+            //     // if is not necessary but makes more explict 
+            //     if(response.status_code === 401 || response.status_code === 400 ){
+            //     //if(response.status_code === 401 || response.status_code === 400 ){
+            //         console.log(response.detail);
+            //         setError(response.detail);
+            //     }
+            // }
         } 
         catch {
             setError("Failed to log out")
@@ -119,7 +119,7 @@ const MyAccount = (props) => {
                 <Card>
                     <Card.Body>
 
-                        < Form  onSubmit={handleDeleteAccount} style={{ margin: 20 }} >
+                        < Form   style={{ margin: 20 }} >
                             {error && <Alert variant="danger">{error}</Alert>}
 
                             <Form.Group id="password">
@@ -127,7 +127,7 @@ const MyAccount = (props) => {
                                 <Form.Control type="password" ref={passwordRef} required />
                             </Form.Group>
 
-                            <Button type = "submit"  className="w-100 text">Delete Account </Button>
+                            <Button onClick={handleDeleteAccount}  className="w-100 text">Delete Account </Button>
                         </Form>
                     </Card.Body>
                 </Card>

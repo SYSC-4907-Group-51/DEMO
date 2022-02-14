@@ -20,7 +20,7 @@ const Login = (props) => {
         setError("")
         const response = await login(emailRef.current.value, passwordRef.current.value)
         console.log(response)
-        if(response.details == "Invalid username/password"){
+        if(response.status_code !== 200){
         //  if(response.status_code !== 200){
             setError("Invalid username/password")
         } else {
@@ -28,7 +28,7 @@ const Login = (props) => {
             store.dispatch({
                 type: "storeAccess",
                 payload: {
-                    access: response.access
+                    access: response.data.access
                 }
             });
             console.log(store.getState());
