@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react"
-import store from "../store"
+// import { store } from "../index";
+import { store, persistor } from "../App";
 const AuthContext = React.createContext()
 
 export function useAuth() {
@@ -16,9 +17,10 @@ export function AuthProvider({ children }) {
     headers.append("Accept", "application/json")
     if (need_auth) {
       const state = store.getState();
-      headers.append("Authorization", `Bearer ${state[0]}`)
+      headers.append("Authorization", `Bearer ${state.storeAccess[0].data.access}`)
     }
     try {
+       
       const response = await fetch(`https://cap-api.gura.ch/${endpoint}`, {
         method,
         headers,

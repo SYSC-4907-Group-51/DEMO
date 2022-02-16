@@ -4,7 +4,8 @@ import { Form, Button, Card, Navbar, Alert } from 'react-bootstrap'
 import Header from './Header';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
-import store from "../store"
+// import { store } from "../index";
+import { store, persistor } from "../App";
 
 
 const MyAccount = (props) => {
@@ -22,9 +23,10 @@ const MyAccount = (props) => {
         try {
             
             setError("")
+            
             const response = await logout();
             console.log(response)
-            // if(response.details == "Successfully Logged out" ){ // checks what type of response
+            
             if(response.status_code === 200 ){
                 navigate("/");
                 console.log(store.getState());
@@ -51,14 +53,8 @@ const MyAccount = (props) => {
         const response = await deleteAccount(passwordRef.current.value)
         console.log(response)
 
-        if(response.details == "Successfully deleted"){ // checks what type of response 
-            // store.dispatch({
-            //     type: "storeAccess",
-            //     payload: {
-            //         access: response.access
-            //     }
-            // });
-            // console.log(store.getState());
+        if(response.status_code === 200){ // checks what type of response 
+           
             navigate("/");
         } else {
             setError("Invalid password")
