@@ -52,27 +52,31 @@ const App = () => {
   useEffect(() => {
      
     console.log(tempLS)
+    if(tempLS){
+      store.dispatch({
+        type: "resfreshedStoreAccess",
+        payload: {
+          data: {
+            username: tempLS.data.username,
+            first_name: tempLS.data.first_name,
+            last_name: tempLS.data.last_name,
+            email: tempLS.data.email,
+            created_at: tempLS.data.created_at,
+            updated_at: tempLS.data.updated_at,
+            refresh: tempLS.data.refresh,
+            access: tempLS.data.access,
+        },
+        status_code: tempLS.status_code
+        }
+      });
+    }
+    
     // saves whole login response 
     //type: "resfreshedStoreAccess"
-    store.dispatch({
-      type: "resfreshedStoreAccess",
-      payload: {
-        data: {
-          username: tempLS.data.username,
-          first_name: tempLS.data.first_name,
-          last_name: tempLS.data.last_name,
-          email: tempLS.data.email,
-          created_at: tempLS.data.created_at,
-          updated_at: tempLS.data.updated_at,
-          refresh: tempLS.data.refresh,
-          access: tempLS.data.access,
-      },
-      status_code: tempLS.status_code
-      }
-    });
+    
    
     const state = store.getState();
-    console.log(state.storeAccess[0].data.access);
+    // console.log(state.storeAccess[0].data.access);
   });
   return (
     <Provider store={store}>

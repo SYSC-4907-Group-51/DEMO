@@ -8,6 +8,10 @@ import { useNavigate } from "react-router-dom";
 
 const Share = (props) => {
     const navigate = useNavigate();
+
+    async function createKey() {
+        
+    }
     
     return (
         <>
@@ -22,7 +26,7 @@ const Share = (props) => {
                     h2 className = 'text-center '>Share Data with Physician</h2>
                 <div className = "d-grid gap-2">
 
-                    <Button onClick = {() => navigate("/share/add-physician")} className = "w-100 text">Add a new Physician </Button>
+                    {/* <Button onClick = {() => navigate("/share/add-physician")} className = "w-100 text">Add a new Physician </Button>
 
                     <div style = {{padding: 50 }} >
                         <h3>Listed Physician:</h3>
@@ -41,8 +45,9 @@ const Share = (props) => {
                             </ul>
                         </label>
                         <Button style = {{down: 10}} className = "w-100 text">Send Key to Physician</Button>
-                    </div>
-
+                    </div> */}
+                    <Form.Control size="lg" type="text" placeholder="Large text" />
+                    <Button style = {{down: 400}} className = "w-100 text"> Create Key  </Button>
                    
                 </div>
                     
