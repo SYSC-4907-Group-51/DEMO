@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Login from "./Patient_view/Login";
 import Share from "./Patient_view/Share"
 import AddPhysician from "./Patient_view/AddPhysician";
-import DataVisualization from "./Physician_view/DataVisualization";
+import Dashboard from "./Physician_view/dataVisualization/Dashboard";
 import KeyLogin from "./Physician_view/KeyLogin";
 import Logs from "./Patient_view/Logs";
 import MyAccount from "./Patient_view/MyAccount";
@@ -87,13 +87,14 @@ const App = () => {
           <Container className="d-flex algin-items-center justify-content-center"
             style={{ minHeight: "100vh" }}
           >
-            <div className="w-100" style={{ maxWidth: "400px" }}>
+            {/* <div className="w-100" style={{ maxWidth: "400px" }}> */}
+            <div>
               <Router>
                 <Routes>
 
                   <Route path="/signup" element={<Signup />} />
                   <Route path="/" element={<Login />} />
-                  <Route path="/dataVisualization" element={<DataVisualization />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/share" element={<Share />} />
                   <Route path="/share/add-physician" element={<AddPhysician />} />
                   <Route path="/keyLogin" element={<KeyLogin />} />

@@ -25,14 +25,15 @@ export default function Signup() {
             //history.push("/")
             // const response2 = response.json()
             console.log(response)
+            
             if (response.status_code === 201) {
                 navigate("/");
             } else {
-                if ( response.json().password) {
+                if ( response.data.password) {
                     setError("Weak password")
-                } else if ( response.json().username) {
+                } else if ( response.data.username) {
                     setError("Username already exists")
-                } else if ( response.json().email) {
+                } else if ( response.data.email) {
                     setError("Email already been used")
                 }
             }
