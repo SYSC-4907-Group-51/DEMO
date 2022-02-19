@@ -13,8 +13,8 @@ const KeyLogin = (props) => {
     const emailRef = useRef()
     const keyRef = useRef()
 
-    async function hcLogin() {
-        
+    async function hcLogin(e) {
+        e.preventDefault()
 
         try {
             setError("")
